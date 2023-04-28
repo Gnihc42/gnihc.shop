@@ -1,0 +1,154 @@
+.maingrid {
+    display: grid;
+    grid-template-columns: 5fr 20fr 10fr 9fr 6fr 7fr;
+    column-gap: 10px;
+    row-gap:10px;
+    width:100%;
+    padding:0 31px;
+    box-sizing: border-box; 
+    background-color:rgb(223,223,223);
+    grid-template-rows: 35px repeat(auto-fill, minmax(31px, 31px));
+    padding-top:25px;
+}
+.maingrid>.Num{
+    justify-content: center;
+}
+.maingrid>.Data,.Action{
+    font-family: monospace;
+    font-size:2em;
+    display: flex;
+   
+    align-items: center;
+}
+.maingrid>hr{
+    width:100%;
+    height:5px;
+    margin-top:0;
+    background-color: gray;
+    border:none;
+}
+
+.maingrid>.titles {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    font-family: monospace;
+    font-size:1.5em;
+}
+.Pages > a{
+    display: flex;
+    justify-content: center;
+    padding:25px 25px;
+
+    width : 25px;
+    text-align: center;
+}
+.Pages {
+    
+    display:flex !important;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+.maingrid>p{
+    text-align: center;
+    font-size:2em;
+}
+
+.pageno{
+    background-color: white;
+    margin: 0 5px;
+    display: flex;
+    justify-content: center;
+    padding: 0 5px;
+    border-radius: 5px;
+}
+.pageact{
+    color:white;
+    padding: 0 25px !important;
+    justify-content: center;
+    align-items: center;
+    border-radius: 35px;
+  
+}
+.Action > .pageact:active{
+    color:black;
+    background-color: white;
+    border-style: inset;
+    border-color: gray;
+
+
+}
+.pageact{
+    border-style:outset;
+}
+.flexcolumn >a{
+    color:white;
+    background-color: none;
+    padding:25px 5px;
+    padding-left:35px   ;
+    margin:5px;
+    font-size: 2em;   
+    font-family: monospace;
+
+}
+.flexcolumn >p  {
+    font-size:2em;
+    padding:25px 5px;
+
+    margin:5px;
+    font-size: 2em;
+    font-family: monospace;
+    color:white;
+    font-weight: bold;
+
+}
+.flexcolumn > a:hover{
+    color: black;
+    background-color: white;
+  
+}
+.Action{
+    display: grid;
+    grid-template-columns: 1fr 25px 1fr;
+    align-items: center;
+}
+.Action > a{
+    text-decoration: none;
+}
+.Data{
+    padding:0 25px;
+}
+.menu {
+    display: grid;
+    grid-template-columns: 2fr 10fr;    
+    height: calc(100vh - 85px);
+    width: 100%;
+
+}
+
+.flexcolumn {
+    background-color: rgb(120, 120, 120);
+    display: flex;
+    flex-direction: column;
+  
+    height:100%;
+
+}
+.gridHighlight{
+    background-color: white;
+    color:black;
+}
+.Action > a {
+    padding:0 15px;
+    box-sizing: border-box;
+    text-align: center;
+
+   
+}
+.Action > a:hover {
+    color: black;
+    background-color: white;
+    border-style: outset;
+}

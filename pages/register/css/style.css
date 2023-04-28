@@ -1,0 +1,139 @@
+.error{
+    color:red;
+    background-color: yellow;
+    display:inline-block;
+    font-family: monospace;
+    font-weight: bold;
+}
+
+.success{
+    color: lime;
+    background: rgba(0,0,0,0);
+    border: 1px solid #009d00;
+    text-shadow: -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000, 1px 1px 0 #000000;
+}
+#myform{
+    padding:25px;
+    padding-bottom: 0;
+}
+.action{
+    margin:7px 0;
+}
+.valdpad{
+    visibility: hidden;
+}
+.not_hidden{
+    display: block !important;
+    visibility:visible !important;
+}
+.secerror > *{
+    color:red;
+    border-color: red;
+}
+
+.validate{
+    font-family: monospace;
+    display: none;
+    color:red;
+    padding-top:5px;
+}
+.inputsection{
+    width: 100%;
+}
+label{
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+}
+.inputwrapper{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+.reggrid{
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    align-items: center;
+}
+.title{
+    font-family: monospace;
+    font-size:3em;
+    margin:0;
+    padding:5px 0;
+    padding-bottom:25px;
+    text-align: center;
+}
+input,select{
+    padding:5px 0;
+}
+.action-wrapper>hr{
+
+    border-width: 2px;
+    
+    border-radius: 5px;
+    width: 100%;
+    border-style: inset;
+    border-color: rgb(255 255 255);
+}
+a{
+    text-decoration: none;
+    color:rgb(0 123 255);
+ 
+}
+#register{
+    font-size: 1.5em;
+    font-family: monospace;
+}
+#formwrapper{
+    position: absolute;
+    top:35%;
+    left:50%;
+    transform: translate(-50%,-35%);
+
+    background-color: rgb(214, 214, 214);
+    border: 15px solid rgb(100, 97, 97);
+    padding:5px 15px;
+    border-radius: 5%;
+    border-style: inset;
+}
+.action-wrapper{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height:100%;
+    flex-direction: column;
+   
+    
+}   
+.actionbutton:hover{
+    border-style: outset;
+    
+}
+.actionbutton:active{
+    border-style:inset  ;
+    
+}
+.actionbutton:active > div{
+    transform: translate(1px,1px);
+}
+input[type=text],input[type=password]{
+    width: 100%;
+}
+
+.hidden{
+    display: none !important;
+}
+.actionbutton{
+    padding:.7rem 6rem;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    width: 0%;
+    white-space: nowrap;
+    margin: 7px 0;
+    border-radius: 5px;
+    border-style: groove;
+    border-width: 5px;
+    border-color: rgb(229 229 229);
+    
+}

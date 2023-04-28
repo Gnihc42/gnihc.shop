@@ -1,0 +1,62 @@
+p.para{
+    color: blue;
+}
+html{
+    height: 100%;
+ 
+    width: 100%;
+    display: flex;
+    box-sizing: border-box;
+}
+body{
+    position: relative;
+    box-sizing: inherit;
+}
+.nav-bar{
+    justify-content: center;
+    height: 5%;
+    padding: 25px 0; 
+    align-items: center;
+    display:flex;
+    background-color:gray;
+   
+    width: 100%;
+}
+
+html{
+    position: fixed;
+}
+body {
+    margin: 0;
+
+    display: table-cell;
+    vertical-align: middle;
+    width: 100%;
+}
+.nav-bar > a{
+    color: white;
+    font-size:  1.7em;
+    text-decoration: none;
+    font-family: monospace;
+    padding: 1% 1em;
+    margin: 0 5px;
+}
+body {
+    margin:0;
+}
+.nav-bar > p {
+    color: white;
+    font-size:  35px;
+    text-decoration: none;
+    font-family: monospace;
+    text-align: left;
+    padding: 5px 25px;
+    padding-left:15px;
+    margin: 0 5px;
+}
+
+.nav-bar > a:hover, .selected {
+    background-color: white;
+    color: black !important;
+   
+}

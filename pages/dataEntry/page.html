@@ -1,0 +1,69 @@
+<html>
+<header>
+    <title>Nhập dữ liệu</title>
+    <link rel="stylesheet" href="dataEntry/css/style.css" />
+</header>
+
+<body>
+    <form  style="display: inline-grid;" method="post" action="/submitData" class="group">
+
+        <label for="Mã nhân viên">Mã nhân viên<input name="Mã nhân viên" /></label>
+
+        <label for="Họ tên">Ho và tên<input id="HoTen" name="Họ tên" /></label>
+        <div class="input_item" >
+            Giới tính
+            <div class="input_content">
+              
+                <input type="radio" name="Giới tính" value="Nam">Nam</input>
+               
+                <input type="radio" name="Giới tính" value="Nữ">Nữ</input>
+            </div>
+        </div>
+        <label>
+            Ngày sinh <input lang="fr-CA" type="date" id="birthday" name="Ngày sinh">
+        </label>
+        <label>
+            Quốc tịch
+            <select name="Quốc tịch">
+                <option value="Việt Nam">Việt Nam</option>
+                <option value="Nga">Nga</option>
+                <option value="Phần Lan">Phần Lan</option>
+            </select>
+        </label>
+        <div class="input_item">
+            Sở thích
+            <div style="padding-left:75px; ">
+                Đọc sách
+                <input type="checkbox" name="Sở thích" value="Đọc sách"></input>
+                Du lịch
+                <input type="checkbox" name="Sở thích" value="Du lịch"></input>
+                Thể thao
+                <input type="checkbox" name="Sở thích" value="Thể thao"></input>
+                Âm nhạc
+                <input type="checkbox" name="Sở thích" value="Âm nhạc"></input>
+                Khác
+                <input type="checkbox" name="Sở thích" value="Khác"></input>
+            </div>
+        </div>
+        <label>
+            Chức danh
+            <textarea name="Chức danh" cols="40" rows="5"></textarea>
+        </label>
+        <label>
+            Hình Ảnh
+            <image />
+            <br>
+          
+        </label>
+        <input type="file" name="Ảnh">
+        <br>
+        <br>
+       
+        <input action="./submit" style="width:100px; text-align:center" type="submit" value="Submit">
+        <button style="width:100px; text-align:center">Nhập lại</button>
+
+
+    </form>
+</body>
+
+</html>

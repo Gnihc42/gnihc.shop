@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "connect-form": "^0.2.1",
+    "cookie-parser": "^1.4.6",
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "multer": "^1.4.5-lts.1",
+    "node-fetch": "^2.6.9",
+    "pg": "^8.10.0",
+    "url": "^0.11.0"
+  },
+  "start": "NODE_PATH=/gnihc.shop/modules"
+}

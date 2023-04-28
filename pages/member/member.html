@@ -1,0 +1,34 @@
+<html>
+<head>
+    <title>Tài khoản</title>
+</head>
+<body>
+    <p id="welcome"></p>
+    <a href="#" onClick="Logout()">bấm vào đây để đăng xuất</a>
+</body>
+<script>
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+    function delete_cookie(name) {
+        document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    }
+    function Logout(name) {
+        delete_cookie("loginSession");
+        location.reload();
+    }
+    console.log(getCookie("loginSession"));
+    if (getCookie("loginSession")) {
+        cookies = JSON.parse(getCookie("loginSession"))
+        console.log("A");
+        document.getElementById("welcome").textContent = `Xin chào ${cookies.Name}`;
+    }
+    else{
+        document.location.href = "/login";
+        document.location.reload();
+    }
+</script>
+
+</html>

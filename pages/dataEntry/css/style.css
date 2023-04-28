@@ -1,0 +1,35 @@
+form > label {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+
+    width: 115%;
+    line-height: 20px;
+    margin-bottom: 10px;
+    vertical-align: middle;
+  }
+
+  .input_item{
+    display:flex;
+  }
+  .input_content{
+    padding-left: 75px;
+  }
+label > input {
+    height: 20px;
+
+    margin-left: 10px;
+  }
+
+  textarea {
+
+    overflow-y: scroll;
+    height: 50px;
+    resize: none; /* Remove this if you want the user to resize the textarea */
+}
+
+img {
+
+    height:50px;
+    width: 50px;
+}
