@@ -12,7 +12,8 @@ async function openPool(){
     port:  "5433",
     connectionString: process.env.sqlStr, 
   });
-  
+  print(process.env.sqlPass)
+  print(process.env.sqlStr)
   query = util.promisify(pool.query).bind(pool);
   console.log(await query('SELECT * from banhang'));
 }
