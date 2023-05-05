@@ -15,7 +15,7 @@ async function openPool(){
   console.log(process.env.sqlPass)
   console.log(process.env.sqlStr)
   query = util.promisify(pool.query).bind(pool);
-  console.log(await query('SELECT * from banhang'));
+ 
 }
 
 
