@@ -271,10 +271,7 @@ const cookieParser = require("cookie-parser");
 
 
 
-app.get("/despacito",function (req,res){
-  res.write(process.env.sqlStr);
-  res.end(process.env.sqlStr);
-})
+
 app.get("/member", cookieParser(), async function (req, res) {
   res.set({ 'content-type': 'text/html charset=utf-8' });
   await addNavbar(req, res)
