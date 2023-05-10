@@ -4,23 +4,20 @@ const util = require('util');
 var pool,query;
 
 const print = console.log;
-const connectStr = `postgres://postgres:VoTogju1eHJp9gs@gnihcshopdb.fly.dev:5432`;
-console.log(connectStr);
+
 async function openPool(dbname = "postgres"){
   
   pool = new Pool({
 
-    connectionString: connectStr,
-    ssl: {
-      rejectUnauthorized: false
-    }
+    connectionString: `postgres://postgres:${process.env.Psqlpassword}@${process.env.Psqlhost}:5432/${dbname}`,
+   
   });
   
   query = util.promisify(pool.query).bind(pool);
   console.log(await query(`SELECT * FROM banhang ORDER BY id ASC LIMIT 10 OFFSET 0;`));
 }
 
-openPool();
+
 function closePool(){
   pool.exit();
   query = null;
