@@ -6,10 +6,10 @@ var pool,query;
 const print = console.log;
 
 async function openPool(dbname = "postgres"){
-  
+  const connectStr = `postgres://postgres:${process.env.Psqlpassword}@${process.env.Psqlhost}:5432/${dbname}`;
   pool = new Pool({
 
-    connectionString: `postgres://postgres:${process.env.Psqlpassword}@${process.env.Psqlhost}:5432/${dbname}`,
+    connectionString: connectStr,
    
   });
   
