@@ -75,13 +75,13 @@
 .Action > .pageact:active{
     color:black;
     background-color: white;
-    border-style: inset;
+    outline-style: inset;
     border-color: gray;
 
 
 }
 .pageact{
-    border-style:outset;
+    outline-style:outset;
 }
 .flexcolumn >a{
     color:white;
@@ -150,5 +150,5 @@
 .Action > a:hover {
     color: black;
     background-color: white;
-    border-style: outset;
+    outline-style: outset;
 }

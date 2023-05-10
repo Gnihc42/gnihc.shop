@@ -27,6 +27,12 @@ function init(app,passedvalues){
    
         res.end(JSON.stringify(data));
       });
+      app.post("/adminPage/edit",cookieParser(),checkIsAdmin(Data),async(req,res)=>{
+        res.set({ 'content-type': 'text/plain charset=utf-8' });
+        const data = await sql["Edit"](req.body.id,req.body.changes);
+   
+        res.end(JSON.stringify(data));
+      })
       app.post("/adminPage/add",cookieParser(),checkIsAdmin(Data),async(req,res)=>{
     
         if (!req.body ){

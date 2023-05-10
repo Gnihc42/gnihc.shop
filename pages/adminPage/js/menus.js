@@ -23,6 +23,8 @@ function OpenMenu() {
 }
 function closeaddMenu() {
     addMenu.classList.add("hidden");
+    editingId = null;
+   
 }
 function errRm() {
     for (element of document.querySelectorAll(".inputlabel")) {
@@ -60,17 +62,41 @@ var currentPath = window.location.pathname;
 var parentPath = currentPath.substring(0, currentPath.lastIndexOf('/'));
 var url = window.location.origin + parentPath;
 console.log(url);
+var editingId = null;
+function Edit(id) {
+
+    
+    addMenu.classList.remove("hidden");
+    addMenu.classList.add("blur_anim");
+ 
+    for (const [key,value] of Object.entries(TempData[id])){
+        const upperchar = key.charAt(0).toUpperCase() + key.slice(1);;
+        $(`#m_${upperchar}`).val(value);
+        if (key == "id")
+        editingId=value;
+    }
+    
+   
+}
+
 async function save() {
 
     const data = $('#add_menu').serializeArray();
     var bool,objdata = errMark(data);
 
     if (bool) return;
-    action_add_menu.classList.add("hidden");
+    action_add_menu.classList.add("hidden");    
     loading_dots.classList.remove("hidden");
     console.log(addMenu);
+    const addorsave = editingId != null ? "edit" : "add";
+    if (editingId != null)
+    objdata = {
+        id:editingId,
+        changes:objdata
+    };
+
     setTimeout(async function(){
-    const res = await fetch(`${url}/add`,
+    const res = await fetch(`${url}/${addorsave}`,
         {
             headers: {
                 "Content-Type": "application/json"

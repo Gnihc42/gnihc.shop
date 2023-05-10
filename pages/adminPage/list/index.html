@@ -103,7 +103,7 @@
 
 
             <label class="inputlabel" for="amount" >Số lượng tồn kho <br><input type="number" min="1" step="1" name="amount" placeholder="Số lượng sản phẩm này còn trong kho"
-                    id="m_Amount"></label>  
+                    id="m_Amount" oninput="this.value = Math.round(this.value);"></label>  
             <div class="loading_dots hidden">
                 <span class="dot"></span>
                 <span class="dot"></span>

@@ -49,14 +49,18 @@ async function Edit(Id,fields){
     var editargs = "";
     for (const [key, value] of Object.entries(fields)){
       if (key == "id" || pattern.test(value)){return};
-      editargs = editargs + `${key} = ${value},`
+      editargs = editargs + `${key} = '${value}',`
     }
-    editargs = editargs.slice(0,-1);
+    editargs = editargs.slice(0,-1);  
+    console.log(editargs);
     const finalquery = `UPDATE banhang SET ${editargs} WHERE id = ${Id};`;
     const data = await query(finalquery);
+    console.log(data);
+    console.log("Edit Success!");
     return true;
   }
   catch (err) {
+    console.log(err);
     return false,err;
   }
 
@@ -95,4 +99,5 @@ module.exports = {
   Delete:Delete,
   openPool:openPool,
   closePool:closePool,
+  Edit:Edit,
 };

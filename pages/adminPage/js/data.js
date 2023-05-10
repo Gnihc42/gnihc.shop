@@ -2,7 +2,7 @@
 var currentPath = window.location.pathname;
 var parentPath = currentPath.substring(0, currentPath.lastIndexOf('/'));
 var url = window.location.origin + parentPath;
-
+var TempData;
 const dataurl = `${url}/data`;
 console.log(dataurl);
 
@@ -39,10 +39,7 @@ const placeholder = document.getElementById("placeholder");
 
 var index = 1;
 
-function Edit(id) {
-    console.log("LMAO");
-    console.log(id);
-}
+
 async function Delete(id) {
     console.log("Lol");
 
@@ -81,7 +78,7 @@ function reloadPage(TempData){
             addElement(key, value, index)
         }
         const actionBar = placeholder.querySelector(".Action").cloneNode(true);
-        actionBar.querySelector(".Edit").setAttribute('onclick', `Edit(${data["id"]}); return false;`);
+        actionBar.querySelector(".Edit").setAttribute('onclick', `Edit(${index-1}); return false;`);
         
         actionBar.querySelector(".Delete").setAttribute('onclick', `Delete(${data["id"]}); return false;`);
         document.querySelector(".maingrid").appendChild(actionBar);
@@ -101,7 +98,7 @@ function reloadPage(TempData){
 
 async function fetchNreload(){
     const response = await fetch(dataurl);
-    const TempData = await response.json();
+    TempData = await response.json();
     console.log(TempData)
     reloadPage(TempData);
 }
