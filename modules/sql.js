@@ -14,7 +14,7 @@ async function openPool(dbname = "postgres"){
   });
   console.log(connectStr);
   query = util.promisify(pool.query).bind(pool);
-  console.log(await query(`SELECT * FROM banhang ORDER BY id ASC LIMIT 10 OFFSET 0;`));
+
 }
 
 
