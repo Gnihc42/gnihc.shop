@@ -6,7 +6,7 @@ if (sep == "//"){
   process.env.NODE_PATH = "D:/Projects/Node/API/modules";
   require("module").Module._initPaths();
 }
-
+console.log(process.env.sqlStr)
 global.rootDir = __dirname;
 console.log(global.rootDir);
 

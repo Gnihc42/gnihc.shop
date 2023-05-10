@@ -3,21 +3,24 @@ const { PassThrough } = require('stream');
 const util = require('util');
 var pool,query;
 
-
-async function openPool(){
+const print = console.log;
+const connectStr = `postgres://postgres:VoTogju1eHJp9gs@gnihcshopdb.fly.dev:5432`;
+console.log(connectStr);
+async function openPool(dbname = "postgres"){
+  
   pool = new Pool({
-    user:    "postgres",
-    password:    process.env.sqlPass,
-    database: "banhang",
-    port:  "5433",
-    connectionString: process.env.sqlStr, 
+
+    connectionString: connectStr,
+    ssl: {
+      rejectUnauthorized: false
+    }
   });
   
   query = util.promisify(pool.query).bind(pool);
-  console.log(await query('SELECT * from banhang'));
+  console.log(await query(`SELECT * FROM banhang ORDER BY id ASC LIMIT 10 OFFSET 0;`));
 }
 
-
+openPool();
 function closePool(){
   pool.exit();
   query = null;
