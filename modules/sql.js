@@ -10,7 +10,7 @@ async function openPool(dbname = "postgres"){
   pool = new Pool({
 
     connectionString: connectStr,
-   
+    database: 'postgres',
   });
 
   query = util.promisify(pool.query).bind(pool);
