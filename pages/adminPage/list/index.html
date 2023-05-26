@@ -1,8 +1,9 @@
-<html>
+<html lang="vi">
 <header>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/menus.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </header>
 
 <body>
@@ -16,16 +17,17 @@
             </p>
 
             <a onclick="OpenMenu()">Thêm</a>
-            <p class="drop-down">Danh sách<a class="toggle-icon">&gt</a>
-                <li class="drop-items">Môn học</li>
-                <li class="drop-items">Sinh viên</li>
-                <li class="drop-items">Đăng ký tuần</li>
-            </p>
+            <div id="dropdown">
+                <p class="drop-down" onclick="drop_down_click()">Danh sách<a class="toggle-icon">&gt</a></p>
+                <li class="drop-items" menu="sinhvien">Sinh viên</li>
+                <li class="drop-items" menu="monhoc">Môn học</li>
+                <li class="drop-items" menu="dangkyhoc">Đăng ký học</li>
+            </div>
             <div class="Action Pages" style="margin-top: auto ; justify-content: center;">
 
-                <a href="#" class="pageact" class="Edit" onclick="prevPage()">&lt</a>
-                <div class="pageno" style="justify-self: center;">1</div>
-                <a href="#" class="pageact" class="Delete" onclick="nextPage()">&gt</a>
+                <a class="pageact" class="Edit" onclick="changePage(-1)">&lt</a>
+                <div class="pageno" style="justify-self: center;" id="pageNumber">1</div>
+                <a class="pageact" class="Delete" onclick="changePage(1)">&gt</a>
             </div>
             <p>
 
@@ -35,7 +37,7 @@
             <grid class="maingrid">
                 <div class="titles">
 
-                    Số thứ tự
+                    STT
 
                 </div>
                 <div class="titles">
@@ -70,27 +72,19 @@
                     <span class="dot anim_dot"></span>
                 </div>
             </div>
-   
+
         </div>
         <div class="loading-bar" style="display:none"></div>
         <div id="placeholder" style="display:none">
 
 
-            <div class="Number Data Num">
-                1
+            <div class="Number Data number Num">
+           
             </div>
-            <div class="Name Data">
-                Samsung
+            <div class="Data text type date option">
+             
             </div>
-            <div class="Manu Data">
-                Samsung
-            </div>
-            <div class="Type Data">
-                RAM
-            </div>
-            <div class="Amount Data Num">
-                250
-            </div>
+
             <div class="Action Data">
 
                 <a href="#" class="Edit" style="text-align:right" ;>Sửa</a>
@@ -99,31 +93,48 @@
             </div>
         </div>
     </div>
+    <div class="inputplaceholder" style="display:none">
+        <label id="placeholdertext" class="inputlabel field-input" > <br><input type="text">
+            <span class="inputerr">
+                Lỗi
+            </span></label>
+        <label id="placeholderdate" class="inputlabel field-input" > <br><input type="date" class="datepicker" />
+            <span class="inputerr">
+                Lỗi
+            </span></label>
+        <div id="placeholderoption" class="field-input">
+            <label class="inputlabel"></label>
+
+            <select class="select_input">
+
+                <option value="RAM">RAM</option>
+                <option value="Nguồn">Nguồn</option>
+                <option value="CPU">CPU</option>
+                <option value="Ổ Cứng">Ổ Cứng</option>
+
+            </select>
+            <span class="inputerr">
+                Lỗi
+            </span>
+        </div>
+        <label id="placeholdernumber" class="inputlabel field-input"> <br><input type="number" min="1" step="1"
+                oninput="this.value = Math.round(this.value);" value="0">
+            <span class="inputerr">
+                Lỗi
+            </span>
+        </label>
+    </div>
     <form id="add_menu" class="hidden" submit="">
         <div class="add_menu_form">
-            <label class="inputlabel" for="name" type="text">Tên sản phẩm <br><input name="name"
-                    placeholder="Tên của sản phẩm" id="m_Name"></label>
+            <div id="add_menu_fields">
 
-            <label class="inputlabel" for="manu">Nhà sản xuất <br><input name="manu"
-                    placeholder="Kingston, Samsung, AMD, Intel" id="m_Manu"></label>
-            <div>
-                <label class="inputlabel" for="type">Phân loại </label>
-                <br>
-                <select name="type" id="m_Type">
-
-                    <option value="RAM">RAM</option>
-                    <option value="Nguồn">Nguồn</option>
-                    <option value="CPU">CPU</option>
-                    <option value="Ổ Cứng">Ổ Cứng</option>
-
-                </select>
             </div>
 
 
 
-            <label class="inputlabel" for="amount">Số lượng tồn kho <br><input type="number" min="1" step="1"
-                    name="amount" placeholder="Số lượng sản phẩm này còn trong kho" id="m_Amount"
-                    oninput="this.value = Math.round(this.value);"></label>
+
+
+
             <div class="loading_dots hidden">
                 <span class="dot anim_dot"></span>
                 <span class="dot anim_dot"></span>
@@ -146,6 +157,7 @@
 
     <script src="./js/menus.js"></script>
     <script src="./js/data.js"></script>
+   
 </body>
 
 </html>

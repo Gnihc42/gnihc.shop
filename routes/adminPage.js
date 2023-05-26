@@ -4,7 +4,7 @@ const cookieParser = require("cookie-parser");
 const checkIsAdmin = require("isAdmin.js");
 const addNavbar = require("addNavbar.js");
 const sql = require("sql.js");
-
+const bodyParser = require('body-parser');
 
 console.log(sql);
 
@@ -22,19 +22,24 @@ function init(app,passedvalues){
       });
 
       app.get("/adminPage/data",cookieParser(),checkIsAdmin(Data),async(req,res)=>{
+        const page = !!req.query.page ?  Number(req.query.page) : 1;
+        const table = !!req.query.table ? req.query.table : "banhang";
         res.set({ 'content-type': 'text/plain charset=utf-8' });
-        const data = await sql["GetData"](1);
+        const data = await sql["GetData"](page,table);
    
         res.end(JSON.stringify(data));
       });
       app.post("/adminPage/edit",cookieParser(),checkIsAdmin(Data),async(req,res)=>{
         res.set({ 'content-type': 'text/plain charset=utf-8' });
-        const data = await sql["Edit"](req.body.id,req.body.changes);
+        const table = !!req.query.table ? req.query.table : "banhang";
+        const data = await sql["Edit"](req.body.id,req.body.changes,table);
    
         res.end(JSON.stringify(data));
       })
       app.post("/adminPage/add",cookieParser(),checkIsAdmin(Data),async(req,res)=>{
-    
+        
+        const table = !!req.query.table ? req.query.table : "banhang";
+        console.log(req.query.table);
         if (!req.body ){
           res.status(400);
           res.end("Missing body!");
@@ -42,11 +47,11 @@ function init(app,passedvalues){
        
         }
         try{
-          var success = await sql.Add(req.body);
-        
-          if(!success){
+          var [success,err] = await sql.Add(req.body,table);
+          
+          if(success != null){
 
-            throw new Error("Add failed!");
+            throw new Error(`Add failed!\n${err}`);
             
           }
           res.status(200);
@@ -55,12 +60,14 @@ function init(app,passedvalues){
         catch(err){
     
           res.status(500);
+          console.log(err);
+          res.write(err.message);
           res.end("Internal Error!");
         }
         
       })
       app.post("/adminPage/delete",cookieParser(),checkIsAdmin(Data),async(req,res)=>{
-      
+        const table = !!req.query.table ? req.query.table : "banhang";
         if (!req.body || !req.body.id){
           res.status(400);
           res.end("Missing id!");
@@ -68,7 +75,7 @@ function init(app,passedvalues){
        
         }
         try{
-          var success = await sql.Delete(req.body.id);
+          var success = await sql.Delete(req.body.id,table);
 
           if(!success){
       

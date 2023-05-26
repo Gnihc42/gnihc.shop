@@ -5,16 +5,16 @@ var pool,query;
 
 const print = console.log;
 
-async function openPool(dbname = "banhang"){
+async function openPool(dbname = "postgres"){
   const connectStr = `postgres://postgres:${process.env.Psqlpassword}@${process.env.Psqlhost}:5432/${dbname}`;
   pool = new Pool({
 
     connectionString: connectStr,
    
   });
-  console.log(connectStr);
-  query = util.promisify(pool.query).bind(pool);
 
+  query = util.promisify(pool.query).bind(pool);
+  
 }
 
 
@@ -22,9 +22,16 @@ function closePool(){
   pool.exit();
   query = null;
 }
-async function GetData(Page) {
+const allowedTable = [
+  "banhang",
+  "monhoc",
+  "sinhvien",
+  "dangkyhoc"
+];
+async function GetData(Page,Table="banhang") {
+  if (!allowedTable.includes(Table))return false,"Forbidden Table";
   try {
-    const data = await query(`SELECT * FROM banhang ORDER BY id ASC LIMIT 10 OFFSET ${Page-1};`);
+    const data = await query(`SELECT * FROM ${Table} ORDER BY id ASC LIMIT 10 OFFSET ${(Page-1)*10};`);
     return true,data.rows;
   }
   catch (err) {
@@ -33,9 +40,11 @@ async function GetData(Page) {
 
 
 }
-async function Delete(Id){
+async function Delete(Id,table="banhang"){
   try {
-    const data = await query(`DELETE FROM banhang WHERE Id=${Id};`);
+    var data,err = await query(`DELETE FROM ${table} WHERE Id=${Id};`);
+   
+    if (!data){return new Error(err)};
     return true;
   }
   catch (err) {
@@ -43,23 +52,26 @@ async function Delete(Id){
   }
 
 }
-var pattern = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-async function Edit(Id,fields){
+var pattern = /[`!@#$%^&*()_+\=\[\]{};':"\\|,.<>\/?~]/;
+async function Edit(Id,fields,table="banhang"){
   try {
     var editargs = "";
+   
     for (const [key, value] of Object.entries(fields)){
       if (key == "id" || pattern.test(value)){break};
 
-      if(key=="amount"){
+      if(typeof value=="number"){
         editargs = editargs + `${key} = ${value},`;
         continue;
       }
-      editargs = editargs + `${key} = N'${value}',`
+
+      editargs = editargs + `${key} = '${value}',`
 
     }
     editargs = editargs.slice(0,-1);  
     console.log(editargs);
-    const finalquery = `UPDATE banhang SET ${editargs} WHERE id = ${Id};`;
+    const finalquery = `UPDATE ${table} SET ${editargs} WHERE id = ${Id};`;
+    console.log(finalquery);
     const data = await query(finalquery);
     console.log(data);
     console.log("Edit Success!");
@@ -72,29 +84,29 @@ async function Edit(Id,fields){
 
 }
 
-async function Add(fields){
+async function Add(fields,table="banhang"){
 
     var editargs = "(";
     var valueargs = "("
-   
+    console.log(fields);
     for (const [key, value] of Object.entries(fields)){
      
-      if (key == "id" || pattern.test(value)){return};
+      if (key == "id" || pattern.test(!!value ? value : "")){ console.log(key); console.log(value); console.log("Add Returned"); return};
       
       valueargs = valueargs + `${key},`;
       if(key=="amount"){
         editargs = editargs + `${value},`;
         continue;
       }
-      editargs = editargs + `N'${value}',`;
+      editargs = editargs + `'${value}',`;
     }
     editargs = editargs.slice(0,-1) + ")";
     valueargs = valueargs.slice(0,-1) + ")";
-    const finalquery = `INSERT INTO banhang${valueargs} VALUES ${editargs};`;
-
-    var data = await query(finalquery);
-  
-    return true;
+    const finalquery = `INSERT INTO ${table}${valueargs} VALUES ${editargs};`;
+    console.log(finalquery);
+    var data,err = await query(finalquery);
+    console.log("Bruh?");
+    return [data,err];
 
 
 
