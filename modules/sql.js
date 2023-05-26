@@ -5,7 +5,7 @@ var pool,query;
 
 const print = console.log;
 
-async function openPool(dbname = "postgres"){
+async function openPool(dbname = "banhang"){
   const connectStr = `postgres://postgres:${process.env.Psqlpassword}@${process.env.Psqlhost}:5432/${dbname}`;
   pool = new Pool({
 
@@ -48,8 +48,14 @@ async function Edit(Id,fields){
   try {
     var editargs = "";
     for (const [key, value] of Object.entries(fields)){
-      if (key == "id" || pattern.test(value)){return};
-      editargs = editargs + `${key} = '${value}',`
+      if (key == "id" || pattern.test(value)){break};
+
+      if(key=="amount"){
+        editargs = editargs + `${key} = ${value},`;
+        continue;
+      }
+      editargs = editargs + `${key} = N'${value}',`
+
     }
     editargs = editargs.slice(0,-1);  
     console.log(editargs);
@@ -80,7 +86,7 @@ async function Add(fields){
         editargs = editargs + `${value},`;
         continue;
       }
-      editargs = editargs + `'${value}',`;
+      editargs = editargs + `N'${value}',`;
     }
     editargs = editargs.slice(0,-1) + ")";
     valueargs = valueargs.slice(0,-1) + ")";

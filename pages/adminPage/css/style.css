@@ -1,6 +1,6 @@
 .maingrid {
     display: grid;
-    grid-template-columns: 5fr 20fr 10fr 9fr 6fr 7fr;
+    grid-template-columns: 5fr 20fr 10fr 9fr 6fr 11fr;
     column-gap: 10px;
     row-gap:10px;
     width:100%;
@@ -9,6 +9,7 @@
     background-color:rgb(223,223,223);
     grid-template-rows: 35px repeat(auto-fill, minmax(31px, 31px));
     padding-top:25px;
+    height:100%;
 }
 .maingrid>.Num{
     justify-content: center;
@@ -27,7 +28,11 @@
     background-color: gray;
     border:none;
 }
-
+.maingridwrapper{
+    height:100%;
+    display:block;
+    
+}
 .maingrid>.titles {
     display: flex;
     justify-content: center;
@@ -92,6 +97,7 @@
     margin:5px;
     font-size: 2em;   
     font-family: monospace;
+    user-select: none;
 
 }
 .flexcolumn >p  {
@@ -103,7 +109,7 @@
     font-family: monospace;
     color:white;
     font-weight: bold;
-
+    user-select: none;
 }
 .flexcolumn > a:hover{
     color: black;
@@ -124,7 +130,7 @@
 .menu {
     display: grid;
     grid-template-columns: 2fr 10fr;    
-    height: calc(100vh - 85px);
+    height: calc(95vh - 150px);
     width: 100%;
 
 }

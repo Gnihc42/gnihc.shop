@@ -45,27 +45,27 @@ async function Delete(id) {
 
 
     const res = await fetch(`${url}/delete`,
-    {
-        headers:{
-            "Content-Type": "application/json"
-        },  
-        method:"POST",
-        body:JSON.stringify({
-            id:id
-        })
-    }
+        {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            method: "POST",
+            body: JSON.stringify({
+                id: id
+            })
+        }
     );
     const status = await res.status;
     console.log(status);
-    if (status == "200"){
+    if (status == "200") {
         console.log(status);
         await fetchNreload();
     }
 }
 
-function reloadPage(TempData){
+function reloadPage(TempData) {
     var maingrid = document.querySelector(".maingrid");
-    for (element of maingrid.querySelectorAll(".Data")){
+    for (element of maingrid.querySelectorAll(".Data")) {
         maingrid.removeChild(element);
     }
     index = 1;
@@ -78,8 +78,8 @@ function reloadPage(TempData){
             addElement(key, value, index)
         }
         const actionBar = placeholder.querySelector(".Action").cloneNode(true);
-        actionBar.querySelector(".Edit").setAttribute('onclick', `Edit(${index-1}); return false;`);
-        
+        actionBar.querySelector(".Edit").setAttribute('onclick', `Edit(${index - 1}); return false;`);
+
         actionBar.querySelector(".Delete").setAttribute('onclick', `Delete(${data["id"]}); return false;`);
         document.querySelector(".maingrid").appendChild(actionBar);
         const eclass = `data_${index}`;
@@ -96,12 +96,39 @@ function reloadPage(TempData){
     console.log(TempData);
 }
 
-async function fetchNreload(){
+async function wait(time) {
+    await new Promise(resolve => setTimeout(resolve, time));
+}
+async function fetchNreload() {
+
+    $("#no-record-bubbles").show();
     const response = await fetch(dataurl);
     TempData = await response.json();
-    console.log(TempData)
+    $("#no-record").toggle(TempData.length <= 0);
+    $("#no-record-bubbles").hide();
+    $("div.loading_bar_remove").remove();
     reloadPage(TempData);
 }
+const title_count = $(".titles").length;
+function* threadLoadingBars(){
+    for (let x = 1; x <= title_count; x++) {
+        console.log("Huh");
+        var clone = $(".loading-bar:first").clone()
+        clone.css("display","block")
+        clone.appendTo('.maingrid');
+        clone.addClass("loading_bar_remove");
+    }
+
+}
 (async function () {
+
+
+    const loadin_bar = $(".loading_bar:first")
+    var maingrid = $(".maingrid");
+    for (let i = 1; i <= 10; i++) {
+        threadLoadingBars().next();
+        
+    }
+    await wait(1500);
     fetchNreload();
 })();

@@ -86,7 +86,7 @@ async function save() {
 
     if (bool) return;
     action_add_menu.classList.add("hidden");    
-    loading_dots.classList.remove("hidden");
+    $(".loading_dots").removeClass("hidden");
     console.log(addMenu);
     const addorsave = editingId != null ? "edit" : "add";
     if (editingId != null)
@@ -114,7 +114,7 @@ async function save() {
 
     console.log(objdata);
     action_add_menu.classList.remove("hidden");
-    loading_dots.classList.add("hidden");
+    $(".loading_dots").addClass("hidden");
     errRm();
 },1000)
 

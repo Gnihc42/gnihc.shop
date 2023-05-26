@@ -16,44 +16,63 @@
             </p>
 
             <a onclick="OpenMenu()">Thêm</a>
-            <a>Xóa</a>
-            <div class="Action Pages" style="margin-top: auto; margin-bottom: 125px  ; justify-content: center;">
+            <p class="drop-down">Danh sách<a class="toggle-icon">&gt</a>
+                <li class="drop-items">Môn học</li>
+                <li class="drop-items">Sinh viên</li>
+                <li class="drop-items">Đăng ký tuần</li>
+            </p>
+            <div class="Action Pages" style="margin-top: auto ; justify-content: center;">
 
-                <a href="#" class="pageact" class="Edit">&lt</a>
+                <a href="#" class="pageact" class="Edit" onclick="prevPage()">&lt</a>
                 <div class="pageno" style="justify-self: center;">1</div>
-                <a href="#" class="pageact" class="Delete">&gt</a>
+                <a href="#" class="pageact" class="Delete" onclick="nextPage()">&gt</a>
             </div>
+            <p>
+
+            </p>
         </div>
-        <grid class="maingrid">
-            <div class="titles">
+        <div class="maingridwrapper">
+            <grid class="maingrid">
+                <div class="titles">
 
-                Số thứ tự
+                    Số thứ tự
 
-            </div>
-            <div class="titles">
-                Tên sản phẩm
-            </div>
-            <div class="titles">
-                Nhà sản xuất
-            </div>
-            <div class="titles">
-                Phân loại
-            </div>
-            <div class="titles">
-                Số lượng
-            </div>
+                </div>
+                <div class="titles">
+                    Tên sản phẩm
+                </div>
+                <div class="titles">
+                    Nhà sản xuất
+                </div>
+                <div class="titles">
+                    Phân loại
+                </div>
+                <div class="titles">
+                    Số lượng
+                </div>
 
-            <div class="titles">
-                Action
-            </div>
-            <hr width="50%" color="green" size="50px" />
-            <hr width="50%" color="green" size="50px" />
-            <hr width="50%" color="green" size="50px" />
-            <hr width="50%" color="green" size="50px" />
-            <hr width="50%" color="green" size="50px" />
-            <hr width="50%" color="green" size="50px" />
+                <div class="titles">
+                    Action
+                </div>
+                <hr width="50%" color="green" size="50px" />
+                <hr width="50%" color="green" size="50px" />
+                <hr width="50%" color="green" size="50px" />
+                <hr width="50%" color="green" size="50px" />
+                <hr width="50%" color="green" size="50px" />
+                <hr width="50%" color="green" size="50px" />
 
-        </grid>
+            </grid>
+            <p id="no-record" style="display:none">Không có bản ghi nào</p>
+            <div id="no-record-bubbles">
+                <div class="loading_dots">
+                    <span class="dot anim_dot"></span>
+                    <span class="dot anim_dot"></span>
+                    <span class="dot anim_dot"></span>
+                </div>
+            </div>
+   
+        </div>
+        <div class="loading-bar" style="display:none"></div>
         <div id="placeholder" style="display:none">
 
 
@@ -82,11 +101,11 @@
     </div>
     <form id="add_menu" class="hidden" submit="">
         <div class="add_menu_form">
-            <label class="inputlabel" for="name" type="text">Tên sản phẩm <br><input name="name" placeholder="Tên của sản phẩm"
-                    id="m_Name"></label>
+            <label class="inputlabel" for="name" type="text">Tên sản phẩm <br><input name="name"
+                    placeholder="Tên của sản phẩm" id="m_Name"></label>
 
-            <label class="inputlabel" for="manu">Nhà sản xuất <br><input name="manu" placeholder="Kingston, Samsung, AMD, Intel"
-                    id="m_Manu"></label>
+            <label class="inputlabel" for="manu">Nhà sản xuất <br><input name="manu"
+                    placeholder="Kingston, Samsung, AMD, Intel" id="m_Manu"></label>
             <div>
                 <label class="inputlabel" for="type">Phân loại </label>
                 <br>
@@ -102,12 +121,13 @@
 
 
 
-            <label class="inputlabel" for="amount" >Số lượng tồn kho <br><input type="number" min="1" step="1" name="amount" placeholder="Số lượng sản phẩm này còn trong kho"
-                    id="m_Amount" oninput="this.value = Math.round(this.value);"></label>  
+            <label class="inputlabel" for="amount">Số lượng tồn kho <br><input type="number" min="1" step="1"
+                    name="amount" placeholder="Số lượng sản phẩm này còn trong kho" id="m_Amount"
+                    oninput="this.value = Math.round(this.value);"></label>
             <div class="loading_dots hidden">
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
+                <span class="dot anim_dot"></span>
+                <span class="dot anim_dot"></span>
+                <span class="dot anim_dot"></span>
             </div>
             <div class="action_add_menu">
                 <a id="save" onclick="save()">
