@@ -14,10 +14,11 @@ async function openPool(dbname = "postgres"){
   });
 
   query = util.promisify(pool.query).bind(pool);
-  var data,err = await query(`SELECT * FROM sinhvien;`);
+  var data = await query(`SELECT * FROM sinhvien;`);
   console.log(data);
 
-  console.log(err);
+
+  console.log(data.rows);
 }
 
 
