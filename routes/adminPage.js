@@ -76,7 +76,7 @@ function init(app,passedvalues){
         }
         try{
           var success = await sql.Delete(req.body.id,table);
-
+          console.log(success);
           if(!success){
       
             throw new Error("Delete failed!");

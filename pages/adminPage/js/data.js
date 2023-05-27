@@ -67,7 +67,7 @@ async function Delete(id) {
 
 
 
-    const res = await fetch(`${url}/delete`,
+    const res = await fetch(`${url}/delete?table=${currentMenu != "_default" ? currentMenu : "banhang"}`,
         {
             headers: {
                 "Content-Type": "application/json"
