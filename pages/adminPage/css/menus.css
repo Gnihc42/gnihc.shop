@@ -105,8 +105,8 @@
     transform: translate(2px, 2px);
 }
 
-.drop_activate > p,.drop_item_activate {
-    background-color: rgba(92, 217, 255, 0.541)
+.drop_activate > p,.drop_activate > span,.drop_item_activate {
+    background-color: rgba(92, 217, 255, 0.541) !important;
 }
 .drop-down>a {
     padding: .5rem 1.5rem;
@@ -118,16 +118,19 @@
     z-index: 1;
 }
 
-.drop-down,.drop-items,.drop_item_activate {
+.drop-down,.drop-items,.drop_item_activate,#search-box > span,#search-button {
     background-position: center;
     transition: background 0.25s;
     user-select: none;
 }
         
-.drop-down:hover,.drop-items:hover {
+.drop-down:hover,.drop-items:hover,#search-box > span:hover {
     background: #ffffff77 radial-gradient(circle, transparent 1%, #ffffff79 1%) center/15000%;
 
 
+}
+#search-button:hover{
+    background: #a1e6ff radial-gradient(circle, transparent 5%, #55d2ff 5%) center/15000%;
 }
 #dropdown > .drop-items,.drop_item_activate{
     animation: drop_hidden .25s;
@@ -145,7 +148,7 @@
 .drop_activate > .drop-down:hover,.drop_item_activate:hover{
     background: rgba(92, 217, 255, 0.541) radial-gradient(circle, transparent 1%, rgba(92, 217, 255, 0.541) 1%) center/15000%;
 }
-.drop-down:active,.drop-items:active {
+.drop-down:active,.drop-items:active,#search-box > span:active,#search-button:active {
 
     background-size: 100%;
     transition: background 0s;
@@ -239,7 +242,7 @@ input[type=number] {
     padding:5px 5px;
     padding-left:35px   ;
     margin: 5px 10px 5px 25px;
-    font-size: 2em;   
+    font-size: 1.5em;   
     font-family: monospace;
     user-select: none;
     overflow: hidden;

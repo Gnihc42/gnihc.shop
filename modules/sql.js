@@ -14,11 +14,7 @@ async function openPool(dbname = "postgres") {
   });
 
   query = util.promisify(pool.query).bind(pool);
-  var data = await query(`SELECT * FROM sinhvien;`);
-  console.log(data);
 
-
-  console.log(data.rows);
 }
 
 
@@ -32,10 +28,33 @@ const allowedTable = [
   "sinhvien",
   "dangkyhoc"
 ];
-async function GetData(Page, Table = "banhang") {
+async function GetData(Page=1, Table = "banhang",searchfor) {
   if (!allowedTable.includes(Table)) return false, "Forbidden Table";
+ 
+  if (Page < 1) return false, "Negative page is not allowed";
+ 
   try {
-    const data = await query(`SELECT * FROM ${Table} ORDER BY id ASC LIMIT 10 OFFSET ${(Page - 1) * 10};`);
+    var get_query = `SELECT * FROM ${Table} `;
+    console.log(searchfor);
+    if (!!searchfor){
+      var columns = await query(`SELECT column_name
+      FROM information_schema.columns
+      WHERE table_name = '${Table}';`);
+    
+      console.log(columns.rows);
+      var str = " WHERE"
+      for (field of columns.rows){
+        if (field.column_name=="id")continue;
+     
+        str = str + " CAST(" + field.column_name + ` AS VARCHAR) LIKE '%${searchfor}%' OR`;
+      }
+      str = str + " false ";
+      get_query = get_query + str;
+     
+    }
+    get_query = get_query + `ORDER BY id ASC LIMIT 10 OFFSET ${(Page - 1) * 10};`;
+    console.log(get_query);
+    const data = await query(get_query);
     return true, data.rows;
   }
   catch (err) {
@@ -116,6 +135,7 @@ async function Add(fields, table = "banhang") {
 
 
 }
+
 module.exports = {
   Add: Add,
   GetData: GetData,

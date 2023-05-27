@@ -7,6 +7,7 @@ var menucd = false;
 var urlParams = new URLSearchParams(window.location.search);
 var table = urlParams.get("table");
 var currentMenu = !!table ? table :  "_default";
+
 lastActivateItem = $(`li[menu='${currentMenu}']`);
 const menuGridStyle = {
     "_default": `5fr 15fr 10fr 9fr 9fr 11fr`,
@@ -210,12 +211,43 @@ function drop_down_click(){
    
     
 }
+$("#inputwrapper > a").on("click",function(){
+    console.log("Brahl");
+    $("#search-bar").val("")
+    insertParam("search","");
+})
+function Search(e){
+    
+    $("#search-box").toggleClass("drop_activate");
+    $("#inputwrapper").addClass("search-bar-hidden");
+    $("#inputwrapper").toggleClass("search-bar-not-hidden");
+
+    if (e){
+        insertParam("search", $("#search-bar").val());
+
+        window.history.pushState({"html":$('html').html(),"pageTitle":$(document).find("title").text()},"", window.location.href);
+        fetchNreload();
+    }
+}
+    
 
 $(".drop-items").on("click", function(item){
+    $("#pageNumber").text("1");
     const triggerItem = $(item.target);
     const alreadyActivate = triggerItem.hasClass("drop_item_activate")
     $(".drop-items").removeClass("drop_item_activate");
+    const lastsearch = $("#search-bar").val();
+    localStorage.setItem(`${currentMenu}_search`,lastsearch);
+
     currentMenu = alreadyActivate ? "_default" : triggerItem.attr("menu");
+
+    
+    
+    $("#search-bar").val( localStorage.getItem(`${currentMenu}_search`));
+    
+   
+
+   
     changeTableStyle();
     const str = updateQueryStringParameter("list","table",currentMenu);
     window.history.pushState({"html":$('html').html(),"pageTitle":$(document).find("title").text()},"", str);
@@ -224,7 +256,7 @@ $(".drop-items").on("click", function(item){
         return;
     }
     triggerItem.toggleClass("drop_item_activate");
-    
+    insertParam("search", $("#search-bar").val());
     fetchNreload();
  });
 

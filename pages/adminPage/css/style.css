@@ -90,7 +90,7 @@
 .pageact{
     outline-style:outset;
 }
-.flexcolumn >a{
+.flexcolumn >a,#search-box{
     color:white;
     background-color: none;
     padding:25px 5px;

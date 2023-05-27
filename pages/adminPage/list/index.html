@@ -2,7 +2,9 @@
 <header>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/menus.css">
+    <link rel="stylesheet" href="css/searchbar.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </header>
 
@@ -10,13 +12,25 @@
     <link href="./css/bar.css" rel="stylesheet" />
 
 
-    <div class="menu">
+    <div class="menu">  
         <div class="flexcolumn">
             <p>
                 Quản lý dữ liệu
             </p>
 
             <a onclick="OpenMenu()">Thêm</a>
+            <div  id="search-box">
+                <span onclick="Search(false)">
+                Tìm kiếm 
+            </span>
+                <div id="inputwrapper" tabindex="0">
+                    <input type="text" id="search-bar" name="search" placeholder="nhập từ khóa tìm kiếm">
+                    <a>X</a>
+                    <button onclick="Search(true)" id="search-button" title="search">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
             <div id="dropdown">
                 <p class="drop-down" onclick="drop_down_click()">Danh sách<a class="toggle-icon">&gt</a></p>
                 <li class="drop-items" menu="sinhvien">Sinh viên</li>
@@ -72,7 +86,7 @@
                     <span class="dot anim_dot"></span>
                 </div>
             </div>
-
+         
         </div>
         <div class="loading-bar" style="display:none"></div>
         <div id="placeholder" style="display:none">
@@ -154,10 +168,10 @@
             </div>
         </div>
     </form>
-
+    <script src="./js/utils.js"></script>
     <script src="./js/menus.js"></script>
     <script src="./js/data.js"></script>
-   
+    
 </body>
 
 </html>

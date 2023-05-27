@@ -1,0 +1,102 @@
+#inputwrapper{
+    width:0%;
+    height:55%;
+    position: absolute;
+    left:100%;
+
+    border-color: rgba(92, 217, 255, 0);;
+    border-style:solid;
+    display:grid;
+    grid-template-columns: 8fr .5fr 1fr;
+    border-radius: 0 5px 5px 0;
+    overflow: hidden;
+    border-left-style: none;
+    z-index: 2;
+    
+    
+}
+#inputwrapper:has(#search-bar:not(:placeholder-shown)) > a {
+
+    color:rgb(205, 205, 205);
+}
+  
+#clearinput{
+    color:black;
+}
+#inputwrapper > a{
+    color:rgba(205, 205, 205,0);
+    font-weight: 10;
+    font-family:sans-serif;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 50%;
+ 
+}
+#inputwrapper > a:hover{
+    color:black;
+}
+#inputwrapper > *{
+    background-color: white;
+    cursor: pointer;
+    border: none;
+}
+
+#search-box{
+    box-sizing: content-box;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    align-items: center;
+    
+}
+#search-box{
+    padding: 0;
+}
+#search-box > span{
+    padding: 25px 5px;
+    padding-left: 35px;
+    width:100%;
+}
+#search-bar{
+    outline: none;
+    font-family: monospace;
+    font-size:1em;
+    width:100%;
+}
+
+.search-bar-not-hidden{
+    animation: search-bar-anim .25s!important;
+    animation-fill-mode: forwards!important;
+}
+.search-bar-hidden{
+    animation: search-bar-hidden .1s ;
+    animation-fill-mode: forwards ;
+}
+@keyframes search-bar-anim {
+    0% {
+        width:0%;
+        border-color: rgba(92, 217, 255, 0.541);
+        background-color: rgba(255, 255, 255, 0);
+    }
+
+    100% {
+        
+        background-color: rgba(255, 255, 255, 0);
+        border-color: rgba(92, 217, 255, 0.541);
+        width:250%;
+    }
+}
+@keyframes search-bar-hidden{
+    0% {
+        background-color: rgba(255, 255, 255, 1);
+        width:250%;
+        border-color: rgba(92, 217, 255, 0.541);
+    }
+
+    100% {
+        background-color: rgba(255, 255, 255, 0);
+        width:0%;
+        border-color: rgba(92, 217, 255, 0);
+    }
+}

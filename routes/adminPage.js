@@ -24,8 +24,9 @@ function init(app,passedvalues){
       app.get("/adminPage/data",cookieParser(),checkIsAdmin(Data),async(req,res)=>{
         const page = !!req.query.page ?  Number(req.query.page) : 1;
         const table = !!req.query.table ? req.query.table : "banhang";
+        const search = req.query.search;
         res.set({ 'content-type': 'text/plain charset=utf-8' });
-        const data = await sql["GetData"](page,table);
+        const data = await sql["GetData"](page,table,search);
    
         res.end(JSON.stringify(data));
       });

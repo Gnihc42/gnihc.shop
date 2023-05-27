@@ -36,12 +36,12 @@ function addControlElement(key, value, index) {
     });
 
 }
-function addElement(key, value, index,row) {
-   
+function addElement(key, value, index, row) {
+
 
 
     const field = menuGridItem[currentMenu][row];
-    console.log(key,field.type);
+
 
     if (!placeholder.querySelector("." + field.type)) { console.log("Returned"); return; }
     var clone = placeholder.querySelector("." + field.type).cloneNode(true);
@@ -89,45 +89,45 @@ function updateQueryStringParameter(uri, key, value) {
     var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
     var separator = uri.indexOf('?') !== -1 ? "&" : "?";
     if (uri.match(re)) {
-      return uri.replace(re, '$1' + key + "=" + value + '$2');
+        return uri.replace(re, '$1' + key + "=" + value + '$2');
     }
     else {
-      return uri + separator + key + "=" + value;
+        return uri + separator + key + "=" + value;
     }
-  }
+}
 var urlParams = new URLSearchParams(window.location.search);
 var myParam = urlParams.get('page');
 const displayText = !!myParam ? myParam : "1";
 
 $("#pageNumber").text(displayText);
 var currentDataPage = Number(displayText);
-function changePage(int){
+function changePage(int) {
     const urlParams = new URLSearchParams(window.location.search);
     var myParam = urlParams.get('page');
     var index = !!myParam ? myParam : "1";
     index = (Number(index) + int);
     currentDataPage = index;
     index = index.toString();
-    if (index <= 0)return;
-    const str = updateQueryStringParameter("list","page",index);
-    window.history.pushState({"html":$('html').html(),"pageTitle":$(document).find("title").text()},"", str);
+    if (index <= 0) return;
+    const str = insertParam("page", index);
+    window.history.pushState({ "html": $('html').html(), "pageTitle": $(document).find("title").text() }, "", str);
     $("#pageNumber").text(index);
     fetchNreload();
 }
-function addActionElement(index,id){
+function addActionElement(index, id) {
     const actionBar = placeholder.querySelector(".Action").cloneNode(true);
-        actionBar.querySelector(".Edit").setAttribute('onclick', `Edit(${index - 1}); return false;`);
+    actionBar.querySelector(".Edit").setAttribute('onclick', `Edit(${index - 1}); return false;`);
 
-        actionBar.querySelector(".Delete").setAttribute('onclick', `Delete(${id}); return false;`);
-        document.querySelector(".maingrid").appendChild(actionBar);
-        const eclass = `data_${index}`;
+    actionBar.querySelector(".Delete").setAttribute('onclick', `Delete(${id}); return false;`);
+    document.querySelector(".maingrid").appendChild(actionBar);
+    const eclass = `data_${index}`;
 
-        actionBar.addEventListener('mouseenter', () => {
-            addHighlight(eclass);
-        });
-        actionBar.addEventListener('mouseleave', () => {
-            removeHighlight(eclass);
-        });
+    actionBar.addEventListener('mouseenter', () => {
+        addHighlight(eclass);
+    });
+    actionBar.addEventListener('mouseleave', () => {
+        removeHighlight(eclass);
+    });
 }
 function reloadPage(TempData) {
     var maingrid = document.querySelector(".maingrid");
@@ -135,31 +135,31 @@ function reloadPage(TempData) {
         maingrid.removeChild(element);
     }
     var index = 1;
-   
+
     for (data of TempData) {
 
 
         addControlElement("Number", index.toString(), index);
         var row = 0;
         for (var [key, value] of Object.entries(data)) {
-            if (key=="id")continue;
+            if (key == "id") continue;
             const field = menuGridItem[currentMenu][row];
-      
-            if (field.type=="date"){
+
+            if (field.type == "date") {
                 var dateParts = value.split('T')[0].split('-');
                 value = dateParts[2] + '/' + dateParts[1] + '/' + dateParts[0];
-                data[key]= value;
-        
+                data[key] = value;
+
             }
-    
-            addElement(key, value, index,row);
+
+            addElement(key, value, index, row);
             row++;
         }
-        addActionElement(index,data["id"]);
- 
+        addActionElement(index, data["id"]);
+
         index++;
     }
-  
+
 }
 
 async function wait(time) {
@@ -168,102 +168,114 @@ async function wait(time) {
 async function fetchNreload() {
     var url = dataurl;
     url = url + `?table=${currentMenu != "_default" ? currentMenu : "banhang"}`
-    if (currentDataPage!=1){
-        url = url+`&page=${currentDataPage}`;
+    if (currentDataPage != 1) {
+        url = url + `&page=${currentDataPage}`;
     }
-    
+    var urlParams = new URLSearchParams(window.location.search);
+    var searchquer = urlParams.get("search");
+    var initsearch = !!searchquer ? searchquer : "";
+
+    url = url + `&search=${initsearch}`;
     $("#no-record-bubbles").show();
     const response = await fetch(url);
     TempData = await response.json();
     $("#no-record").toggle(TempData.length <= 0);
+    var norecordmess = "Không có bản ghi nào";
+    $("#no-record").text(norecordmess + (!!initsearch && initsearch != "" ? ` với truy vấn tiềm kiếm "${initsearch}"` : ""))
     $("#no-record-bubbles").hide();
     $("div.loading_bar_remove").remove();
     reloadPage(TempData);
 }
 const title_count = $(".titles").length;
-function* threadLoadingBars(){
+function* threadLoadingBars() {
     for (let x = 1; x <= title_count; x++) {
-      
+
         var clone = $(".loading-bar:first").clone()
-        clone.css("display","block")
+        clone.css("display", "block")
         clone.appendTo('.maingrid');
         clone.addClass("loading_bar_remove");
     }
 
 }
-function changeTableStyle(){
-    
+function changeTableStyle() {
+
+
+
     const maingrid = $(".maingrid");
     maingrid.empty();
     $("#add_menu_fields").empty();
-   
+
     const menuKey = currentMenu;
+
+
     const fields = menuGridItem[menuKey];
     console.log(menuGridItem[menuKey]);
     console.log(menuGridItem);
     console.log(menuKey);
-    const barnum = 2+menuGridItem[menuKey].length;
-        $('<div>', {
-         
+    const barnum = 2 + menuGridItem[menuKey].length;
+    $('<div>', {
+
         class: 'titles',
         text: "STT"
     }).appendTo(".maingrid");
-    for (field of fields){
+    for (field of fields) {
         $('<div>', {
-         
+
             class: 'titles',
             text: field.display
         }).appendTo(".maingrid");
 
         var clone = $(`#placeholder${field.type}`).clone(true);
-        clone.attr("placeholder",field.placeholder); 
+        clone.attr("placeholder", field.placeholder);
         clone.removeAttr("id");
         clone.appendTo("#add_menu_fields");
 
-    
-  
+
+
         var label = clone.add(clone.children()).filter(".inputlabel");
 
         const text = field.display + label.html();
         label.html(text);
-        label.attr("for",field.sqlfieldname);
+        label.attr("for", field.sqlfieldname);
 
         var input = clone.add(clone.children()).filter("input,select");
-        input.attr("id","m_"+field.sqlfieldname);
-        input.attr("name",field.sqlfieldname);
-        if (!!field.maxlength){
-           
-            input.attr("maxLength",field.maxlength.toString());
-            
+        input.attr("id", "m_" + field.sqlfieldname);
+        input.attr("name", field.sqlfieldname);
+        if (!!field.maxlength) {
+
+            input.attr("maxLength", field.maxlength.toString());
+
         }
     }
 
     $('<div>', {
-         
+
         class: 'titles',
-      
+
     }).appendTo(".maingrid");
-    for (var i=1;i<=barnum;i++){
+    for (var i = 1; i <= barnum; i++) {
         $('<hr>', {
-         
-            width:"100%",
-        
-            color:"green"
+
+            width: "100%",
+
+            color: "green"
         }).appendTo(".maingrid");
     }
-    maingrid.css("grid-template-columns",menuGridStyle[menuKey]);
+    maingrid.css("grid-template-columns", menuGridStyle[menuKey]);
+
 
 }
 (async function () {
 
-    
-    
+
+    $("#search-bar").val(localStorage.getItem(`${currentMenu}_search`));
+    insertParam("search", $("#search-bar").val());
     changeTableStyle();
     const loadin_bar = $(".loading_bar:first")
     var maingrid = $(".maingrid");
     for (let i = 1; i <= 10; i++) {
         threadLoadingBars().next();
-        
+
     }
     await wait(1500);
     fetchNreload();
