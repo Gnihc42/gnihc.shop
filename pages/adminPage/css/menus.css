@@ -27,12 +27,12 @@
 }
 
 .huge-text {
-    height:300%;
+    height:1000% !important;
 }
 .field-input {
     padding: 5px;
     width: 100%;
-    font-size: 2em;
+    font-size: 1.25em;
     font-family: monospace;
     display: flex;
     flex-direction: column;
@@ -199,7 +199,7 @@ input[type=number] {
     padding: 1rem;
     width: 90%;
     height: 1rem;
-    font-size: .65em;
+    font-size: 1.25em;
     font-family: monospace;
     margin-left: 1rem;
     border-style: inset;

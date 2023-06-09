@@ -29,9 +29,9 @@ const menuGridStyle = {
     "tacgia":
         `2fr 2fr 10fr 5fr 2fr`,
     "tintuc":
-        `2fr 10fr 5fr 2fr`,
+        `2fr 10fr 10fr 5fr 5fr 4fr`,
     "chude":
-        `2fr 10fr 1fr`
+        `2fr 3fr 10fr 1fr`
 }
 
 const menuGridItem = {
@@ -150,17 +150,36 @@ const menuGridItem = {
             type: "hugetext"
         },
         {
+            display: "Tiêu đề",
+            placeholder: "Tiêu đề của tin tức",
+            sqlfieldname: "TIEUDE",
+            maxlength: 100,
+            type: "text"
+        },
+        {
             display: "Ngày gửi",
             sqlfieldname: "NGAYGUI",
             type: "date"
         },
         {
-            display: "Id của tác giả",
+            display: "Id tác giả",
             sqlfieldname: "TGIA_ID",
+            type: "number"
+        },
+        {
+            display: "Id chủ đề",
+            placeholder: "Id của chủ đề",
+            sqlfieldname: "CHUDE_ID",
             type: "number"
         }
     ],
     chude:[
+        {
+            display: "Id chủ đề",
+            placeholder: "Id của chủ đề",
+            sqlfieldname: "id",
+            type: "number"
+        },
         {
             display: "Tên chủ đề",
             placeholder: "Tên của chủ đề",

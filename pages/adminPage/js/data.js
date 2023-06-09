@@ -225,6 +225,15 @@ function changeTableStyle() {
     }).appendTo(".maingrid");
     for (var field of fields) {
 
+        var clone = $(`#placeholder${field.type}`).clone(true);
+        clone.attr("placeholder", field.placeholder);
+        clone.removeAttr("id");
+        clone.appendTo("#add_menu_fields");
+        var label = clone.add(clone.children()).filter(".inputlabel");
+
+        const text = field.display + label.html();
+        label.html(text);
+        label.attr("for", field.sqlfieldname);
         if (field.type == "hugetext"){continue};
        
         $('<div>', {
@@ -233,18 +242,11 @@ function changeTableStyle() {
             text: field.display
         }).appendTo(".maingrid");
 
-        var clone = $(`#placeholder${field.type}`).clone(true);
-        clone.attr("placeholder", field.placeholder);
-        clone.removeAttr("id");
-        clone.appendTo("#add_menu_fields");
+   
 
 
 
-        var label = clone.add(clone.children()).filter(".inputlabel");
-
-        const text = field.display + label.html();
-        label.html(text);
-        label.attr("for", field.sqlfieldname);
+  
 
         var input = clone.add(clone.children()).filter("input,select");
         input.attr("id", "m_" + field.sqlfieldname);
@@ -255,6 +257,8 @@ function changeTableStyle() {
             input.attr("maxLength", field.maxlength.toString());
 
         }
+
+        
     }
 
     $('<div>', {
