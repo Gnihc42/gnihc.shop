@@ -140,11 +140,13 @@ function reloadPage(TempData) {
 
 
         addControlElement("Number", index.toString(), index);
+        showid = false;
+        for (var field of menuGridItem[currentMenu]) if(field.sqlfieldname == "id"){ showid = true; break;}
         var row = 0;
         for (var [key, value] of Object.entries(data)) {
-            if (key == "id") continue;
+            if (key == "id" && !showid){ console.log("continued"); continue;}
             const field = menuGridItem[currentMenu][row];
-
+            if (field.type == "hugetext"){console.log(field); row++; continue;}
             if (field.type == "date") {
                 var dateParts = value.split('T')[0].split('-');
                 value = dateParts[2] + '/' + dateParts[1] + '/' + dateParts[0];
@@ -209,16 +211,22 @@ function changeTableStyle() {
 
 
     const fields = menuGridItem[menuKey];
-    console.log(menuGridItem[menuKey]);
-    console.log(menuGridItem);
-    console.log(menuKey);
-    const barnum = 2 + menuGridItem[menuKey].length;
+
+    var barnum = 2;
+    for (var field of menuGridItem[menuKey]) {
+        console.log(field.type);
+        if (field.type == "hugetext"){ console.log("Continued"); continue;}
+        barnum = barnum + 1;
+    }
     $('<div>', {
 
         class: 'titles',
         text: "STT"
     }).appendTo(".maingrid");
-    for (field of fields) {
+    for (var field of fields) {
+
+        if (field.type == "hugetext"){continue};
+       
         $('<div>', {
 
             class: 'titles',
@@ -241,6 +249,7 @@ function changeTableStyle() {
         var input = clone.add(clone.children()).filter("input,select");
         input.attr("id", "m_" + field.sqlfieldname);
         input.attr("name", field.sqlfieldname);
+        input.attr("placeholder",field.placeholder);
         if (!!field.maxlength) {
 
             input.attr("maxLength", field.maxlength.toString());

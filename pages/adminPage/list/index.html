@@ -31,11 +31,22 @@
                     </button>
                 </div>
             </div>
-            <div id="dropdown">
-                <p class="drop-down" onclick="drop_down_click()">Danh sách<a class="toggle-icon">&gt</a></p>
+            <div class="dropdownList">
+                <p class="drop-down" >Sinh viên<a class="toggle-icon">&gt</a></p>
+                <div class="drop-wrapper">
                 <li class="drop-items" menu="sinhvien">Sinh viên</li>
                 <li class="drop-items" menu="monhoc">Môn học</li>
                 <li class="drop-items" menu="dangkyhoc">Đăng ký học</li>
+            </div>
+            </div>
+            <div class="dropdownList">
+                <p class="drop-down" >Tin tức<a class="toggle-icon">&gt</a></p>
+                <div class="drop-wrapper">
+                <li class="drop-items" menu="tacgia">Tác giả</li>
+                <li class="drop-items" menu="chude">Chủ đề</li>
+                
+                <li class="drop-items" menu="tintuc">Tin tức</li>
+            </div>
             </div>
             <div class="Action Pages" style="margin-top: auto ; justify-content: center;">
 
@@ -108,6 +119,10 @@
         </div>
     </div>
     <div class="inputplaceholder" style="display:none">
+        <label id="placeholderhugetext" class="inputlabel field-input huge-text" > <br><input type="text">
+            <span class="inputerr">
+                Lỗi
+            </span></label>
         <label id="placeholdertext" class="inputlabel field-input" > <br><input type="text">
             <span class="inputerr">
                 Lỗi

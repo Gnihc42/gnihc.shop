@@ -27,7 +27,7 @@ function checkIsAdmin(Data) {
       await AdminReject(req,res)
       return;
     }
-    console.log("XD");
+
     if (!req.cookies["loginSession"]){await AdminReject(req,res); return;}
     next();
   }

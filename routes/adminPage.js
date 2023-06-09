@@ -6,7 +6,7 @@ const addNavbar = require("addNavbar.js");
 const sql = require("sql.js");
 const bodyParser = require('body-parser');
 
-console.log(sql);
+
 
 function init(app,passedvalues){
   const Data = passedvalues[0];
@@ -26,9 +26,9 @@ function init(app,passedvalues){
         const table = !!req.query.table ? req.query.table : "banhang";
         const search = req.query.search;
         res.set({ 'content-type': 'text/plain charset=utf-8' });
-        const data = await sql["GetData"](page,table,search);
-   
-        res.end(JSON.stringify(data));
+        const [success,data] = await sql["GetData"](page,table,search);
+        if (!success) { res.status(401); res.end("Error"); return};
+        res.end(JSON.stringify(data));  
       });
       app.post("/adminPage/edit",cookieParser(),checkIsAdmin(Data),async(req,res)=>{
         res.set({ 'content-type': 'text/plain charset=utf-8' });

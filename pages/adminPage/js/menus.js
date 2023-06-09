@@ -7,7 +7,15 @@ var menucd = false;
 var urlParams = new URLSearchParams(window.location.search);
 var table = urlParams.get("table");
 var currentMenu = !!table ? table :  "_default";
+var activatedli = $(`li[menu='${currentMenu}']`);
+try{
+    activatedli.addClass("drop_item_activate");
+    $(activatedli.parent()[0].parentNode).addClass("drop_activate");
 
+}
+catch{
+
+}
 lastActivateItem = $(`li[menu='${currentMenu}']`);
 const menuGridStyle = {
     "_default": `5fr 15fr 10fr 9fr 9fr 11fr`,
@@ -17,7 +25,13 @@ const menuGridStyle = {
     "monhoc":
         `5fr 10fr 10fr 5fr`,
     "dangkyhoc":
-        `5fr 10fr 10fr 5fr`
+        `5fr 10fr 10fr 5fr`,
+    "tacgia":
+        `2fr 2fr 10fr 5fr 2fr`,
+    "tintuc":
+        `2fr 10fr 5fr 2fr`,
+    "chude":
+        `2fr 10fr 1fr`
 }
 
 const menuGridItem = {
@@ -104,8 +118,57 @@ const menuGridItem = {
             maxlength: 10,
             type: "text"
         }, 
+    ],
+    tacgia:[
+        {
+            display: "Id tác giả",
+            placeholder: "Id của tác giả",
+            sqlfieldname: "id",
+            type: "number"
+        },
+        {
+            display: "Tên tác giả", 
+            placeholder: "Tên của tác giả",
+            sqlfieldname: "TENTG",
+            maxlength: 50,
+            type: "text"
+        }, 
+        {
+            display: "Email", 
+            placeholder: "Địa chỉ email của tác giả",
+            sqlfieldname: "EMAIL",
+            maxlength: 50,
+            type: "text"
+        }
+    ],
+    tintuc:[
+        {
+            display: "Nội dung",
+            placeholder: "Nội dung của tin tức",
+            sqlfieldname: "NOIDUNG",
+            maxlength: 6900,
+            type: "hugetext"
+        },
+        {
+            display: "Ngày gửi",
+            sqlfieldname: "NGAYGUI",
+            type: "date"
+        },
+        {
+            display: "Id của tác giả",
+            sqlfieldname: "TGIA_ID",
+            type: "number"
+        }
+    ],
+    chude:[
+        {
+            display: "Tên chủ đề",
+            placeholder: "Tên của chủ đề",
+            sqlfieldname: "TENCD",
+            maxlength: 50,
+            type: "text"
+        },
     ]
-
 }
 function OpenMenu() {
     $(".inputerr").removeClass("not_hidden");
@@ -196,10 +259,14 @@ function Edit(id) {
    
 }
 var lastActivateItem;
-const dropdown_ele = $("#dropdown");
-function drop_down_click(){
-
-    dropdown_ele.toggleClass("drop_activate");
+$(".drop-down").on("click", function(item){
+    var dropdown_ele = $(item.target.parentNode);
+    var hasclass = dropdown_ele.hasClass("drop_activate");
+    console.log(hasclass);
+    $(".dropdownList").removeClass("drop_activate");
+    console.log(dropdown_ele);
+    if (hasclass){return;}
+    dropdown_ele.addClass("drop_activate");
   
     if (dropdown_ele.hasClass("drop_activate") && lastActivateItem!=null){
      
@@ -209,8 +276,9 @@ function drop_down_click(){
     lastActivateItem = $(".drop_item_activate");
     $(".drop-items").removeClass("drop_item_activate");
    
-    
-}
+});
+
+
 $("#inputwrapper > a").on("click",function(){
     console.log("Brahl");
     $("#search-bar").val("")
@@ -256,6 +324,7 @@ $(".drop-items").on("click", function(item){
         return;
     }
     triggerItem.toggleClass("drop_item_activate");
+    if (!alreadyActivate) lastActivateItem = triggerItem;
     insertParam("search", $("#search-bar").val());
     fetchNreload();
  });

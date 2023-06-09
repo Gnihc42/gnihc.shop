@@ -26,12 +26,15 @@ const allowedTable = [
   "banhang",
   "monhoc",
   "sinhvien",
-  "dangkyhoc"
+  "dangkyhoc",
+  "tacgia",
+  "tintuc",
+  "chude"
 ];
 async function GetData(Page=1, Table = "banhang",searchfor) {
-  if (!allowedTable.includes(Table)) return false, "Forbidden Table";
+  if (!allowedTable.includes(Table)) return [false, "Forbidden Table"];
  
-  if (Page < 1) return false, "Negative page is not allowed";
+  if (Page < 1) return [false, "Negative page is not allowed"];
  
   try {
     var get_query = `SELECT * FROM ${Table} `;
@@ -55,10 +58,10 @@ async function GetData(Page=1, Table = "banhang",searchfor) {
     get_query = get_query + `ORDER BY id ASC LIMIT 10 OFFSET ${(Page - 1) * 10};`;
     console.log(get_query);
     const data = await query(get_query);
-    return true, data.rows;
+    return [true, data.rows];
   }
   catch (err) {
-    return false, console.log(err);
+    return [false, console.log(err)];
   }
 
 
@@ -76,7 +79,7 @@ async function Delete(Id, table = "banhang") {
   }
 
 }
-var pattern = /[`!@#$%^&*()_+\=\[\]{};':"\\|,.<>\/?~]/;
+var pattern = /[`!#$%^&*()_+\=\[\]{};':"\\|,<>\/?~]/;
 async function Edit(Id, fields, table = "banhang") {
   try {
     var editargs = "";
@@ -115,7 +118,8 @@ async function Add(fields, table = "banhang") {
   console.log(fields);
   for (const [key, value] of Object.entries(fields)) {
 
-    if (key == "id" || pattern.test(!!value ? value : "")) { console.log(key); console.log(value); console.log("Add Returned"); return };
+    if (key == "id" || pattern.test(!!value ? value : "")) {
+       console.log(key); console.log(value); console.log("Add Returned"); return };
 
     valueargs = valueargs + `${key},`;
     if (key == "amount") {
