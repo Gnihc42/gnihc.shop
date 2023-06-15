@@ -67,6 +67,7 @@ async function GetData(Page=1, Table = "banhang",searchfor) {
 
 }
 async function Delete(Id, table = "banhang") {
+  table = table == "_default" ? "banhang" : table;
   try {
     const finalquery = `DELETE FROM ${table} WHERE Id=${Id};`;
     var data, err = await query(finalquery);
@@ -81,6 +82,7 @@ async function Delete(Id, table = "banhang") {
 }
 var pattern = /[`!#$%^&*()_+\=\[\]{};':"\\|,<>\/?~]/;
 async function Edit(Id, fields, table = "banhang") {
+  table = table == "_default" ? "banhang" : table;
   try {
     var editargs = "";
 
@@ -112,7 +114,7 @@ async function Edit(Id, fields, table = "banhang") {
 }
 
 async function Add(fields, table = "banhang") {
-
+  table = table == "_default" ? "banhang" : table;
   var editargs = "(";
   var valueargs = "("
   console.log(fields);

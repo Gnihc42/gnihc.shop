@@ -1,0 +1,39 @@
+.chude{
+    display: flex;
+    list-style-type: none;
+
+}
+
+
+.chude > li{
+    padding: 5px 25px;
+    font-family: monospace;
+    font-size: 1.5em;
+    color: white;
+}
+
+.chude > li:hover{
+    transform: scale(1.1);
+}
+.chude > li > hr {
+    visibility: hidden;
+}
+
+.chude > li:hover > hr {
+    visibility: unset;
+}
+
+
+
+
+
+
+
+
+
+.tintucwrapper{
+    background-image: url("../background/background1.png");
+    background-color: black;
+    filter: blur(1px);
+  -webkit-filter: blur(1px);
+}

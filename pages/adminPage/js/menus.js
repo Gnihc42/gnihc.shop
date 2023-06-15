@@ -171,7 +171,14 @@ const menuGridItem = {
             placeholder: "Id của chủ đề",
             sqlfieldname: "CHUDE_ID",
             type: "number"
-        }
+        },
+        {
+            display: "Link ảnh",
+            placeholder: "Link ảnh của tin tức",
+            sqlfieldname: "ANH",
+            maxlength: 100,
+            type: "hugetext"
+        },
     ],
     chude:[
         {

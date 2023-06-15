@@ -113,13 +113,9 @@ app.get("/", (req, res) => {
 app.get("/home", async (req, res) => {
   res.set({ 'content-type': 'text/html charset=utf-8' });
   await addNavbar(req, res)
-  const date = new Date();
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
+ 
   fs.readFile(path.join(__dirname, "/pages/home/index.html"), "utf-8", async (_, data) => {
     res.write(data);
-    res.write(`${day}-${month}-${year}`);
 
     await addAd(req,res);
     res.end();

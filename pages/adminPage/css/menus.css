@@ -209,10 +209,10 @@ input[type=number] {
     grid-template-columns: repeat(auto-fill,1fr);
 }
 .add_menu_form {
-
+    height: 75%;
     position: absolute;
     background-color: rgb(223, 223, 223);
-    height: 66%;
+ 
     width: 35%;
     top: 50%;
     left: 50%;
