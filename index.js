@@ -364,6 +364,8 @@ for (const [key, value] of Object.entries(routes)) {
 }
 const port = 3000;
 
+app.use('/api', require('./routes/api.js'))
+
 app.listen(port, () => {
   console.log(`Example app listening on http://127.0.0.1:${port} !`);
 });
