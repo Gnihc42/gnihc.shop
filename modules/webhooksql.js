@@ -5,17 +5,16 @@ var pool, query;
 
 const print = console.log;
 
-async function openPool(dbname = "postgres") {
-  const connectStr = `postgres://postgres:${process.env.Psqlpassword}@${process.env.Psqlhost}:5432/${dbname}`;
-  pool = new Pool({
 
-    connectionString: connectStr,
-    database: 'postgres',
-  });
+const connectStr = `postgres://postgres:${process.env.Psqlpassword}@${process.env.Psqlhost}:5432/${dbname}`;
+pool = new Pool({
 
-  query = util.promisify(pool.query).bind(pool);
+  connectionString: connectStr,
+  database: 'postgres',
+});
 
-}
+query = util.promisify(pool.query).bind(pool);
+
 
 async function Add(id) {
   const finalquery = `INSERT INTO WHITELIST(id) VALUES (${id});`;
@@ -35,5 +34,5 @@ async function Get(id) {
 module.exports = {
   Add: Add,
   Get: Get,
-  openPool: openPool
+
 };
