@@ -100,6 +100,7 @@ router.get("/",async function(req,res){
     res.end(val);
     return;
   }
+  res.end("sumthing wong");
 })
 
 router.post('/',function(req, res) {
