@@ -9,7 +9,7 @@ const not_found = function (res) {
   res.statusCode = 404;
   res.end('Not Found\n');
 };
-const sql = require("sql.js")
+const sql = require("webhooksql.js")
 
 
 const token = process.env.discordBotToken; // Replace with your bot's access token
