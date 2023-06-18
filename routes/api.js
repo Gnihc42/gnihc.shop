@@ -96,8 +96,10 @@ router.get("/",async function(req,res){
   res.setHeader('Content-Type', 'text/plain; charset=utf-8');
   if (parsedUrl.query.key="awrakejsrkjawtweaGetId" && parsedUrl.query.id){
     res.statusCode = 200;
-    const val =  toString(await sql.Get(parsedUrl.query.id))
-    res.end(val);
+    const val = await sql.Get(parsedUrl.query.id);
+
+    res.end(val ? "true" : "false");
+
     return;
   }
   res.end("sumthing wong");

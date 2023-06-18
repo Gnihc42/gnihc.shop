@@ -1,6 +1,6 @@
 
 (async function main() {
-    const url = "https://perlica-webhook.onrender.com/api?key=NzE4NDYzMTczNTE0MTAwNzAw&message=retro uooooo 😭😭😭😭"
+    const url = "http://localhost:3000/api?key=akjdwakdaejwrkawSetWL&id=1000"
    var err,res = await fetch(url, {
 
 

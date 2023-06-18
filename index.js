@@ -34,9 +34,9 @@ function skip(req,res,next){
 function addroute(route, filePath, includesnavbar,isAdmin) {
 
   route = route;
-  console.log(route)
+
   filePath = path.join(__dirname, filePath);
-  console.log(filePath)
+
 
 
   app.get(route,cookieParser(), isAdmin ? checkIsAdmin(Data) : skip,async (req, res) => {
@@ -82,8 +82,7 @@ function scan(folder, pathname, include_parent_dir,isAdmin) {
       
         var route = "/" + file;
         route = pathname ? pathname + route : route;
-        console.log(file)
-        console.log(route)
+      
         if (stats.isDirectory()) {
           scan(filePath, route, true,isAdmin);
         }
