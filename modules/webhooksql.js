@@ -25,7 +25,7 @@ async function Add(id) {
 
 async function Get(id) {
   const finalquery = `select * from whitelist where id = ${id};`
-  const [data, err] = await query(finalquery);
+  const data = await query(finalquery);
 
   return data.rows >= 1;
 
