@@ -10,9 +10,9 @@ const not_found = function (res) {
   res.end('Not Found\n');
 };
 const sql = require("sql.js")
-  
 
-const token = 'MTAyNjQxMTQ3NTg4NTEwOTI2OQ.GS5slW.IP_9sXpdLcGHbQqPz8si4Y_zfTVJar4ER4kDeY'; // Replace with your bot's access token
+
+const token = process.env.discordBotToken; // Replace with your bot's access token
 
 const sendMessage = async (message,channelId) => {
   console.log(channelId)
