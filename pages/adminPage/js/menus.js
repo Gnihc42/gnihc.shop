@@ -236,13 +236,25 @@ async function errMark(data) {
     const menuKey = currentMenu;
   
     $(".inputerr").removeClass("not_hidden");
-    for (const [index,val] of data.entries()) {
+    var index = 0;
+    console.log(data);
+    for (const [_,val] of data.entries()) {
+        if (menuGridItem[menuKey][index].sqlfieldname == "id"){
+            index = index + 1;
+        }
+        console.log(val.name);
         if (menuGridItem[menuKey][index].type == "number"){
+            console.log("Number lo");
+            console.log(menuGridItem[menuKey][index].type);
             obj[val.name] = Number(val.value);
+            index = index + 1;
             continue;
         }
+        console.log(val.name);
         obj[val.name] = val.value;
+        index = index + 1;
     }
+    console.log(obj);
     var haserror = false;
     for (const [index,element] of document.getElementById("add_menu_fields").querySelectorAll(".inputlabel").entries()) {
         const forval = element.getAttribute("for");
@@ -250,7 +262,8 @@ async function errMark(data) {
         span = !!element.getElementsByTagName("span")[0] ? element.getElementsByTagName("span")[0] : element.parentNode.getElementsByTagName("span")[0];
 
         span.classList.remove("not_hidden");
-        console.log(index);
+        console.log(forval);
+        console.log(obj);
         if (obj[forval].toString().length >= 1) { continue; }
        
         haserror = true;
@@ -361,9 +374,10 @@ function loadMenu(){
 async function save() {
     errRm();
     const serialData = $('#add_menu').serializeArray();
-
+    console.log(serialData);
     var [bool,objdata] = await errMark(serialData);
-  
+    console.log("A");
+    console.log(serialData);
     if (bool) return;
     action_add_menu.classList.add("hidden");    
     $(".loading_dots").removeClass("hidden");
@@ -376,6 +390,8 @@ async function save() {
         changes:objdata,
  
     };
+
+    console.log(objdata);
 
     setTimeout(async function(){
     const res = await fetch(`${url}/${addorsave}`+`?table=${currentMenu}`,

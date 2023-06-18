@@ -2,6 +2,9 @@
 <header>
     <link href="/home/css/style.css" rel="stylesheet" />
     <link href="/home/css/chudestyle.css" rel="stylesheet" />
+
+    <link href="/home/css/tintucgrid.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Trang chủ Gnihc.shop</title>
 
 
@@ -12,35 +15,41 @@
 
     <link href="/home/css/style.css" rel="stylesheet" />
     <div class="tintucwrapper">
- 
-    </div>
-    <div class="innertintucwrapper">
-        <div class="chude">
-            <li class="chudeitem">
-                React
-                <hr width="100%"   />
+
+        <div class="innertintucwrapper">
+            <div id="chudelist">
+                <li class="chudeitem" default>
+                    Tất cả
+                    <hr width="100%" />
+                </li>
+              
+           
+            </div>
+         
+            <div id="tintuc_grid">
+   
+     
+            </div>
+
+            <li id="chudeplaceholder" class="placeholder">
+     
+         
             </li>
-            <li class="chudeitem">
-                JavaScript
-                <hr width="100%"   />
-            </li>
-            <li class="chudeitem">
-                AngularJS
-                <hr width="100%"   />
-            </li>
-            <li class="chudeitem">
-                .NET C#
-                <hr width="100%"   />
-            </li>
-            <li class="chudeitem">
-                Rust
-                <hr width="100%"   />
-            </li>
+
+            <div id="tintucplaceholder" class="placeholder" >
+                <span class="tieude"></span>
+            </div>
+    
+            <script src="home/js/index.js"></script>
         </div>
-</div>
+        <div class="tintucbackground">
+        </div>
+
+   
+    </div>
     <script src="/shared/javascript/navbar.js"></script>
 
-    <script src="/shared/javascript/navbar.js"></script>
+
 </body>
 
 </html>

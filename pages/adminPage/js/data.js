@@ -141,13 +141,23 @@ function reloadPage(TempData) {
 
         addControlElement("Number", index.toString(), index);
         showid = false;
-        for (var field of menuGridItem[currentMenu]) if(field.sqlfieldname == "id"){ showid = true; break;}
+        for (var field of menuGridItem[currentMenu]) if (field.sqlfieldname == "id") { showid = true; break; }
         var row = 0;
+        console.log(data);
+        console.log(menuGridItem[currentMenu]);
         for (var [key, value] of Object.entries(data)) {
-            if (key == "id" && !showid){ console.log("continued"); continue;}
+        
+            if (key == "id" && !showid) { console.log("continued"); 
+                if (currentMenu=="tintuc"){row++};
+                continue; }
             const field = menuGridItem[currentMenu][row];
-            if (field.type == "hugetext"){console.log(field); row++; continue;}
+            console.log(key);
+            console.log(field);
+            if (!field){continue;}
+            if (field.type == "hugetext") { console.log(field); row++; continue; }
             if (field.type == "date") {
+                console.log(key);
+                console.log(value);
                 var dateParts = value.split('T')[0].split('-');
                 value = dateParts[2] + '/' + dateParts[1] + '/' + dateParts[0];
                 data[key] = value;
@@ -183,7 +193,7 @@ async function fetchNreload() {
     TempData = await response.json();
     $("#no-record").toggle(TempData.length <= 0);
     var norecordmess = "Không có bản ghi nào";
-    $("#no-record").text(norecordmess + (!!initsearch && initsearch != "" ? ` với truy vấn tiềm kiếm "${initsearch}"` : ""))
+    $("#no-record").text(norecordmess + (!!initsearch && initsearch != "" ? ` với truy vấn tìm kiếm "${initsearch}"` : ""))
     $("#no-record-bubbles").hide();
     $("div.loading_bar_remove").remove();
     reloadPage(TempData);
@@ -214,8 +224,8 @@ function changeTableStyle() {
 
     var barnum = 2;
     for (var field of menuGridItem[menuKey]) {
-        console.log(field.type);
-        if (field.type == "hugetext"){ console.log("Continued"); continue;}
+
+        if (field.type == "hugetext") { console.log("Continued"); continue; }
         barnum = barnum + 1;
     }
     $('<div>', {
@@ -225,40 +235,48 @@ function changeTableStyle() {
     }).appendTo(".maingrid");
     for (var field of fields) {
 
+
+
+
+
+        if (field.type != "hugetext") {
+
+            $('<div>', {
+
+                class: 'titles',
+                text: field.display
+            }).appendTo(".maingrid");
+        };
+
+
+
+
+        if (field.sqlfieldname == "id") { continue }
+
         var clone = $(`#placeholder${field.type}`).clone(true);
         clone.attr("placeholder", field.placeholder);
         clone.removeAttr("id");
         clone.appendTo("#add_menu_fields");
         var label = clone.add(clone.children()).filter(".inputlabel");
-
         const text = field.display + label.html();
         label.html(text);
         label.attr("for", field.sqlfieldname);
-        if (field.type == "hugetext"){continue};
-       
-        $('<div>', {
-
-            class: 'titles',
-            text: field.display
-        }).appendTo(".maingrid");
-
-   
-
-
-
-  
 
         var input = clone.add(clone.children()).filter("input,select");
         input.attr("id", "m_" + field.sqlfieldname);
         input.attr("name", field.sqlfieldname);
-        input.attr("placeholder",field.placeholder);
+        input.attr("placeholder", field.placeholder);
         if (!!field.maxlength) {
 
             input.attr("maxLength", field.maxlength.toString());
 
         }
 
-        
+
+
+
+
+
     }
 
     $('<div>', {

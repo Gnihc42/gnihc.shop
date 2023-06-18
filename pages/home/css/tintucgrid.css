@@ -1,0 +1,54 @@
+#tintuc_grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 25px;
+}
+
+.tintuc {
+    height: 150px;
+    background-color: #DDD;
+    border-radius: 5px;
+
+}
+
+.placeholder{
+    display: none;
+}
+
+.tintuc > span{
+    font-family: monospace;
+ 
+    height: 25%;
+    display: block;
+  
+    top: 75%;
+    padding: 0 5%;
+    font-size: 1.25em;
+    text-overflow: ellipsis;
+    font-weight: 600;
+}
+
+.tintuc:hover {
+    animation-name: identifier;
+    animation-duration: .25s;
+    animation-timing-function: cubic-bezier();
+    animation-fill-mode: forwards;
+}
+
+@keyframes identifier {
+    0%{
+        transform: translate(0px);
+        transform: scale(100%);
+    }
+    100%{
+        transform: translate(5px);
+        transform: scale(110%);
+    }
+}
+.tintuc {
+    object-fit: cover;
+}
+.tintuc:nth-child(4n+3),
+.tintuc:nth-child(4n+4) {
+    grid-column: span 2;
+}

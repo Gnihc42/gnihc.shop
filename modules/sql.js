@@ -6,6 +6,7 @@ var pool, query;
 const print = console.log;
 
 async function openPool(dbname = "postgres") {
+  console.log(process.env.Psqlpassword);
   const connectStr = `postgres://postgres:${process.env.Psqlpassword}@${process.env.Psqlhost}:5432/${dbname}`;
   pool = new Pool({
 
@@ -80,7 +81,7 @@ async function Delete(Id, table = "banhang") {
   }
 
 }
-var pattern = /[`!#$%^&*()_+\=\[\]{};':"\\|,<>\/?~]/;
+var pattern = /[`!$%^&*()_+=[]{};'",<>?~]/;
 async function Edit(Id, fields, table = "banhang") {
   table = table == "_default" ? "banhang" : table;
   try {

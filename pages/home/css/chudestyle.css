@@ -1,39 +1,41 @@
-.chude{
+#chudelist{
     display: flex;
     list-style-type: none;
-
+    padding-top: 25px;
 }
 
 
-.chude > li{
+#chudelist > li{
     padding: 5px 25px;
     font-family: monospace;
     font-size: 1.5em;
     color: white;
+    cursor: pointer;
+    user-select: none; 
 }
 
-.chude > li:hover{
+#chudelist > li:hover, .item_selected{
     transform: scale(1.1);
 }
-.chude > li > hr {
+#chudelist > li > hr {
     visibility: hidden;
 }
 
-.chude > li:hover > hr {
-    visibility: unset;
+#chudelist > li:hover > hr, .item_selected > hr {
+    visibility: unset !important;
 }
 
 
 
 
-
-
-
-
-
-.tintucwrapper{
+.tintucbackground{
     background-image: url("../background/background1.png");
     background-color: black;
-    filter: blur(1px);
-  -webkit-filter: blur(1px);
+    filter: blur(2px) brightness(50%);
+  -webkit-filter: blur(2px) brightness(50%);
+    width: 100%;
+    height: 100%;
+    position: sticky;
+    top:0;
+    z-index: -1;
 }
