@@ -5,7 +5,7 @@ var pool, query;
 
 const print = console.log;
 
-
+dbname = "postgres";
 const connectStr = `postgres://postgres:${process.env.Psqlpassword}@${process.env.Psqlhost}:5432/${dbname}`;
 pool = new Pool({
 
